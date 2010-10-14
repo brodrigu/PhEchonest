@@ -14,9 +14,13 @@ abstract class PhEchonest_Abstract
     
     protected static function makeRequest($method, $query = array())
     {
-        $result = Zend_Json::decode(file_get_contents(self::buildRequestUrl($method, $query)));
+        $url = self::buildRequestUrl($method, $query);
+        $result = Zend_Json::decode(file_get_contents($url));
         
         if ($result['response']['status']['message'] != 'Success') {
+            global $log;
+            $log->debug($url);
+            $log->debug($result);
             throw new Exception('API request failed');
         }
         unset($result['response']['status']);

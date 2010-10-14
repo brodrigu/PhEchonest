@@ -1,0 +1,15 @@
+PhEchonest
+PHP Echonest API Library
+
+Requires:
+Zend_Json
+
+Examples:
+
+$artists = PhEchonest_Artist::searchByName($name); //returns array of PhEchonest_Artist objects
+
+$artist = new PhEchonest_Artist($id);
+
+$tracks = $artist->getTracks(); //returns array of track info
+
+more to come...

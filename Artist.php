@@ -24,7 +24,7 @@ class PhEchonest_Artist extends PhEchonest_Abstract
         return $this->$accessor;
     }
     
-    public function getTracks($limit = 20, $offest = 0)
+    public function getTracks($limit = 20, $offset = 0)
     {
         $method = 'audio';
         $query = array(
@@ -39,11 +39,14 @@ class PhEchonest_Artist extends PhEchonest_Abstract
     /**
      * search for an artist by name
      */
-    public static function searchByName($name)
+    public static function searchByName($name, $results = 20, $fuzzy = true)
     {
         $method = 'search';
         $query = array(
-            'name' => $name
+            'name' => $name,
+            'fuzzy_match' => ($fuzzy ? 'true' : 'false'),
+            'results' => $results
+            
         );
         $result = self::makeRequest($method, $query);
         
